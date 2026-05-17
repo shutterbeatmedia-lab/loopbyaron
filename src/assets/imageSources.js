@@ -1,14 +1,35 @@
-// Replace these URLs with local imports once the real images are added to src/assets.
-// Suggested file layout:
-// - /Users/yashnahar/loop-trilogy/src/assets/images/aron.jpg
-// - /Users/yashnahar/loop-trilogy/src/assets/images/the-loop/cover.jpg
-// - /Users/yashnahar/loop-trilogy/src/assets/images/the-loop/carousel-1.jpg
-// - /Users/yashnahar/loop-trilogy/src/assets/images/within-the-loop/cover.jpg
-// - /Users/yashnahar/loop-trilogy/src/assets/images/beyond-the-loop/cover.jpg
+import Ch1P1 from './images/The Loop/Ch1P1.png'
+import Ch1P2 from './images/The Loop/Ch1P2.png'
+import Ch1P3 from './images/The Loop/Ch1P3.png'
+import Ch1P4 from './images/The Loop/Ch1P4.png'
+import Ch2P1 from './images/The Loop/Ch2P1.png'
+import Ch2P2 from './images/The Loop/Ch2P2.png'
+import Ch2P3 from './images/The Loop/Ch2P3.png'
+import Ch2P4 from './images/The Loop/Ch2P4.png'
+import Ch3P1 from './images/The Loop/Ch3P1.png'
+import Ch3P2 from './images/The Loop/Ch3P2.png'
+import Ch3P3 from './images/The Loop/Ch3P3.png'
+import Ch3P4 from './images/The Loop/Ch3P4.png'
+import Ch4P1 from './images/The Loop/Ch4P1.png'
+import Ch4P2 from './images/The Loop/Ch4P2.png'
+import Ch4P3 from './images/The Loop/Ch4P3.png'
+import Ch4P4 from './images/The Loop/Ch4P4.png'
+import Ch5P1 from './images/The Loop/Ch5P1.png'
+import Ch5P2 from './images/The Loop/Ch5P2.png'
+import Ch5P3 from './images/The Loop/Ch5P3.png'
+import Ch5P4 from './images/The Loop/Ch5P4.png'
 
 export const authorImages = {
   primary: '/Users/yashnahar/loop-trilogy/src/assets/images/aron.jpg',
 }
+
+export const chapterIllustrations = [
+  Ch1P1, Ch1P2, Ch1P3, Ch1P4,
+  Ch2P1, Ch2P2, Ch2P3, Ch2P4,
+  Ch3P1, Ch3P2, Ch3P3, Ch3P4,
+  Ch4P1, Ch4P2, Ch4P3, Ch4P4,
+  Ch5P1, Ch5P2, Ch5P3, Ch5P4,
+]
 
 export const bookImages = {
   theLoop: {
