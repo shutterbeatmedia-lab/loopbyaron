@@ -57,14 +57,18 @@ export default function Navbar({ currentPage, onNavigate }) {
   ]
 
   const linkCls = (active) =>
-    `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${active ? 'bg-teal-600 text-white' : 'text-gray-700 hover:text-teal-600 hover:bg-teal-50'}`
+    `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+      active
+        ? 'bg-teal-600 text-white'
+        : 'text-[#c4a882] hover:text-[#e8d5b0] hover:bg-[#2e1e12]'
+    }`
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm border-b border-gray-100'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 bg-[#1c140e] transition-shadow duration-300 ${scrolled ? 'shadow-[0_4px_20px_rgba(0,0,0,0.5)]' : 'border-b border-[#2e1e12]'}`}>
       <nav aria-label="Primary" className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 h-[70px] flex items-center justify-between gap-4">
         {/* Logo */}
         <button onClick={() => go('home')} className="flex min-w-0 items-center gap-2 group rounded-lg px-1 py-2 text-left">
-          <span className="truncate font-bold text-base text-teal-600 transition-colors group-hover:text-teal-700 sm:text-lg">The Loop Trilogy</span>
+          <span className="truncate font-bold text-base text-teal-400 transition-colors group-hover:text-teal-300 sm:text-lg">The Loop Trilogy</span>
         </button>
 
         {/* Desktop */}
@@ -94,11 +98,11 @@ export default function Navbar({ currentPage, onNavigate }) {
                   exit={{ opacity: 0, y: -8, scale: 0.97 }}
                   transition={{ duration: 0.15 }}
                   role="menu"
-                  className="absolute top-full right-0 mt-1 w-60 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50"
+                  className="absolute top-full right-0 mt-1 w-60 bg-[#1c140e] rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-[#2e1e12] py-2 z-50"
                 >
                   {trilogyItems.map(({ label, page }) => (
                     <button key={page} onClick={() => go(page)} role="menuitem"
-                      className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600 transition-colors">
+                      className="w-full text-left px-4 py-2.5 text-sm text-[#c4a882] hover:bg-[#2e1e12] hover:text-[#e8d5b0] transition-colors">
                       {label}
                     </button>
                   ))}
@@ -113,7 +117,7 @@ export default function Navbar({ currentPage, onNavigate }) {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden rounded-lg p-2.5 text-gray-600 transition-colors hover:text-teal-600"
+          className="md:hidden rounded-lg p-2.5 text-[#c4a882] transition-colors hover:text-[#e8d5b0]"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
@@ -128,25 +132,25 @@ export default function Navbar({ currentPage, onNavigate }) {
         {mobileOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.25 }}
             id="mobile-menu"
-            className="md:hidden max-h-[calc(100vh-70px)] overflow-y-auto bg-white border-t border-gray-100">
+            className="md:hidden max-h-[calc(100vh-70px)] overflow-y-auto bg-[#1c140e] border-t border-[#2e1e12]">
             <div className="px-4 py-4 sm:px-5 space-y-1">
               {navItems.map(({ label, page }) => (
                 <button key={page} onClick={() => go(page)}
-                  className={`w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-colors ${isActive(page) ? 'bg-teal-600 text-white' : 'text-gray-700 hover:bg-teal-50 hover:text-teal-600'}`}>
+                  className={`w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-colors ${isActive(page) ? 'bg-teal-600 text-white' : 'text-[#c4a882] hover:bg-[#2e1e12] hover:text-[#e8d5b0]'}`}>
                   {label}
                 </button>
               ))}
               <div className="pt-1">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 py-2">The Trilogy</p>
+                <p className="text-xs font-semibold text-[#5a4030] uppercase tracking-wider px-3 py-2">The Trilogy</p>
                 {trilogyItems.map(({ label, page }) => (
                   <button key={page} onClick={() => go(page)}
-                    className={`w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-colors ${isActive(page) ? 'bg-teal-50 text-teal-600' : 'text-gray-600 hover:bg-teal-50 hover:text-teal-600'}`}>
+                    className={`w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-colors ${isActive(page) ? 'bg-[#2e1e12] text-teal-400' : 'text-[#c4a882] hover:bg-[#2e1e12] hover:text-[#e8d5b0]'}`}>
                     {label}
                   </button>
                 ))}
               </div>
               <button onClick={() => go('contact')}
-                className={`w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-colors ${isActive('contact') ? 'bg-teal-600 text-white' : 'text-gray-700 hover:bg-teal-50 hover:text-teal-600'}`}>
+                className={`w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-colors ${isActive('contact') ? 'bg-teal-600 text-white' : 'text-[#c4a882] hover:bg-[#2e1e12] hover:text-[#e8d5b0]'}`}>
                 Contact
               </button>
             </div>

@@ -25,7 +25,7 @@ export default function Newsletter({ variant = 'full' }) {
     <section className="py-12 md:py-16">
       <div className="section-shell-wide">
         <FadeIn>
-          <div className="rounded-[2rem] p-8 md:p-10 text-center" style={{ background: 'linear-gradient(135deg,#0f766e 0%,#0d9488 100%)' }}>
+          <div className="rounded-[2rem] p-8 md:p-10 text-center" style={{ background: 'linear-gradient(135deg,#523010 0%,#924e12 100%)' }}>
             <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-5">
               <Mail size={22} className="text-white" />
             </div>
@@ -55,7 +55,7 @@ export default function Newsletter({ variant = 'full' }) {
   )
 
   return (
-    <section className="relative section-space overflow-hidden" style={{ background: 'linear-gradient(135deg,#0f2744 0%,#0f766e 60%,#0d9488 100%)' }}>
+    <section className="relative section-space overflow-hidden" style={{ background: 'linear-gradient(135deg,#1c140e 0%,#723b0c 60%,#924e12 100%)' }}>
       <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px,rgba(255,255,255,0.6) 1px,transparent 0)', backgroundSize: '28px 28px' }} />
       <div className="section-shell-wide relative z-10 text-center">
         <FadeIn>
