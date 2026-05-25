@@ -89,7 +89,7 @@ function Hero({ onNavigate }) {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg,rgba(10,40,70,0.80) 0%,rgba(13,100,90,0.75) 100%)' }}
+          style={{ background: 'rgba(0,0,0,0.50)' }}
         />
         <HeroContent onNavigate={onNavigate} />
       </section>
@@ -103,7 +103,7 @@ function Hero({ onNavigate }) {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg,rgba(10,40,70,0.80) 0%,rgba(13,100,90,0.75) 100%)' }}
+          style={{ background: 'rgba(0,0,0,0.50)' }}
         />
         <HeroContent onNavigate={onNavigate} />
       </section>
@@ -162,7 +162,7 @@ function BookCard({ book, index, onNavigate }) {
           <h3 className="text-white font-bold text-xl drop-shadow-lg">{book.title}</h3>
           {isComingSoonPart && (
             <p className="mt-1 text-white font-semibold text-sm uppercase tracking-[0.18em] drop-shadow-lg">
-              Coming Soon
+              On Sale Now
             </p>
           )}
         </div>
