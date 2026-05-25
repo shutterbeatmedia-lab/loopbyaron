@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ShoppingCart, ArrowRight, ChevronLeft, ChevronRight, PenTool, User } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
 import StarRating from '../components/StarRating'
@@ -10,146 +10,82 @@ import Footer from '../components/Footer'
 import BuyPopup from '../components/BuyPopup/BuyPopup'
 import { books, getBookBySlug } from '../data/content'
 
-// ─── CHAPTER GALLERY — book reader (Part I only) ─────────────────────────────
-const pageVariants = {
-  enter: (dir) => ({ x: dir > 0 ? '55%' : '-55%', opacity: 0, scale: 0.92 }),
-  center: { x: 0, opacity: 1, scale: 1 },
-  exit: (dir) => ({ x: dir > 0 ? '-55%' : '55%', opacity: 0, scale: 0.92 }),
-}
-
+// ─── CHAPTER GALLERY (Part I only) ───────────────────────────────────────────
 function ChapterGallery({ images }) {
-  const [current, setCurrent] = useState(0)
-  const [direction, setDirection] = useState(0)
+  const [selected, setSelected] = useState(null)
 
-  const goTo = (index) => {
-    setDirection(index > current ? 1 : -1)
-    setCurrent(index)
-  }
-  const prev = () => current > 0 && goTo(current - 1)
-  const next = () => current < images.length - 1 && goTo(current + 1)
-
-  const season = Math.floor(current / 4) + 1
-  const part = (current % 4) + 1
+  const prev = (e) => { e.stopPropagation(); setSelected((s) => (s - 1 + images.length) % images.length) }
+  const next = (e) => { e.stopPropagation(); setSelected((s) => (s + 1) % images.length) }
 
   return (
-    <section className="section-space bg-[#16110c]">
+    <section className="section-space bg-[#faf8f5]">
       <div className="section-shell-wide">
-        <FadeIn className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ color: '#e8d5b0' }}>
-            A Glimpse Inside
-          </h2>
-          <p className="text-base" style={{ color: '#7a6548' }}>
-            Chapter illustrations from The Loop
-          </p>
+        <FadeIn className="text-center mb-12">
+          <h2 className="section-title">A Glimpse Inside</h2>
+          <p className="section-sub">Chapter illustrations from The Loop — 5 seasons, 4 parts each</p>
         </FadeIn>
 
-        <div className="flex flex-col items-center gap-6">
-          {/* Season tabs */}
-          <div className="flex gap-2 flex-wrap justify-center">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <button
-                key={s}
-                onClick={() => goTo((s - 1) * 4)}
-                className="px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
-                style={season === s
-                  ? { background: '#7a4f2a', color: '#f0dfc0' }
-                  : { background: 'rgba(255,255,255,0.05)', color: '#7a6548' }
-                }
-              >
-                Season {s}
-              </button>
-            ))}
-          </div>
-
-          {/* Book page */}
-          <div className="relative w-full flex justify-center">
-            {/* Depth shadow behind page */}
-            <div
-              className="absolute rounded-xl"
-              style={{
-                width: 'min(320px, 88vw)',
-                aspectRatio: '2/3',
-                top: '8px',
-                background: '#0a0704',
-                filter: 'blur(12px)',
-                opacity: 0.8,
-              }}
-            />
-            <div
-              className="relative rounded-xl overflow-hidden"
-              style={{ width: 'min(320px, 88vw)', aspectRatio: '2/3', boxShadow: '0 24px 64px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,220,160,0.08)' }}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {images.map((src, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-20px' }}
+              transition={{ duration: 0.4, delay: (i % 4) * 0.08 }}
+              className="relative overflow-hidden rounded-xl cursor-pointer group"
+              style={{ aspectRatio: '2/3' }}
+              onClick={() => setSelected(i)}
             >
-              <AnimatePresence custom={direction} mode="wait">
-                <motion.img
-                  key={current}
-                  custom={direction}
-                  variants={pageVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
-                  src={images[current]}
-                  alt={`Season ${season}, Part ${part}`}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  draggable={false}
-                />
-              </AnimatePresence>
-              {/* Subtle page-edge gradient on right */}
-              <div className="absolute inset-y-0 right-0 w-6 pointer-events-none" style={{ background: 'linear-gradient(to left, rgba(0,0,0,0.18), transparent)' }} />
-            </div>
-          </div>
-
-          {/* Navigation row */}
-          <div className="flex items-center gap-5">
-            <button
-              onClick={prev}
-              disabled={current === 0}
-              aria-label="Previous page"
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed"
-              style={{ border: '1px solid #3a2e22', color: '#9a7a55' }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = '#7a4f2a'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#3a2e22'}
-            >
-              <ChevronLeft size={18} />
-            </button>
-
-            {/* Part dots */}
-            <div className="flex gap-2 items-center">
-              {[0, 1, 2, 3].map((p) => {
-                const idx = (season - 1) * 4 + p
-                return (
-                  <button
-                    key={p}
-                    onClick={() => goTo(idx)}
-                    aria-label={`Part ${p + 1}`}
-                    className="rounded-full transition-all duration-300"
-                    style={idx === current
-                      ? { width: '20px', height: '7px', background: '#a0692a' }
-                      : { width: '7px', height: '7px', background: '#3a2e22' }
-                    }
-                  />
-                )
-              })}
-            </div>
-
-            <button
-              onClick={next}
-              disabled={current === images.length - 1}
-              aria-label="Next page"
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed"
-              style={{ border: '1px solid #3a2e22', color: '#9a7a55' }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = '#7a4f2a'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#3a2e22'}
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
-
-          <p className="text-sm" style={{ color: '#5a4a35' }}>
-            Season {season} · Part {part} &nbsp;·&nbsp; {current + 1} of {images.length}
-          </p>
+              <img
+                src={src}
+                alt={`Chapter illustration ${i + 1}`}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+            </motion.div>
+          ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {selected !== null && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelected(null)}
+        >
+          <button
+            aria-label="Close"
+            className="absolute top-4 right-4 text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 transition-colors"
+            onClick={() => setSelected(null)}
+          >×</button>
+          <button
+            aria-label="Previous"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 transition-colors"
+            onClick={prev}
+          >‹</button>
+          <motion.img
+            key={selected}
+            src={images[selected]}
+            alt={`Chapter illustration ${selected + 1}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.25 }}
+            className="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            aria-label="Next"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 transition-colors"
+            onClick={next}
+          >›</button>
+          <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm">
+            {selected + 1} / {images.length}
+          </p>
+        </div>
+      )}
     </section>
   )
 }
@@ -321,6 +257,22 @@ function ExploreOtherParts({ currentBook, onNavigate }) {
                     )}
                   </div>
                 </div>
+
+                {/* Illustration thumbnails — Part I only */}
+                {isPartOne && book.chapterImages?.length > 0 && (
+                  <div className="bg-gray-50 border-b border-gray-100 px-2 py-2 overflow-x-auto">
+                    <div className="flex gap-1.5 w-max">
+                      {book.chapterImages.map((src, i) => (
+                        <img
+                          key={i} src={src} alt={`Illustration ${i + 1}`}
+                          loading="lazy" decoding="async"
+                          className="flex-shrink-0 rounded-md object-cover"
+                          style={{ width: 48, height: 48 }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Buttons */}
                 <div className="p-4 flex gap-3">

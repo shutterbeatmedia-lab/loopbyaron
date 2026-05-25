@@ -1,230 +1,96 @@
-import React, { useState } from 'react';
-import './BuyPopup.css';
+import { useState } from 'react'
+import { X, ExternalLink, ShoppingCart } from 'lucide-react'
+import './BuyPopup.css'
 
-const platforms = [
+const buyData = [
   {
-    name: 'Amazon',
-    audiobook: 'Buy',
-    ebook: 'Buy',
-    hardcopy: 'Buy',
-    links: {
-      audiobook: '#amazon-audiobook',
-      ebook: '#amazon-ebook',
-      hardcopy: 'https://tr.ee/OSIjSw_AS2'
-    }
+    category: 'Hardcover / Hardback',
+    links: [
+      { name: 'Amazon.in',  url: 'https://tr.ee/OSIjSw_AS2' },
+      { name: 'Flipkart',   url: 'https://dl.flipkart.com/s/3MDw4zNNNN' },
+    ],
   },
   {
-    name: 'Amazon (Paperback)',
-    audiobook: null,
-    ebook: null,
-    hardcopy: 'Buy',
-    links: {
-      hardcopy: 'https://tr.ee/EGGFgrrDNB'
-    }
+    category: 'Paperback',
+    links: [
+      { name: 'Amazon.in',    url: 'https://tr.ee/EGGFgrrDNB' },
+      { name: 'Flipkart.com', url: 'https://tr.ee/1ZmQrRzCI-' },
+    ],
   },
   {
-    name: 'Amazon Prime & Global',
-    audiobook: null,
-    ebook: null,
-    hardcopy: null,
-    links: {}
+    category: 'Ebook',
+    links: [
+      { name: 'Amazon Kindle', url: 'https://tr.ee/3cVyVZbnjB' },
+    ],
   },
-  {
-    name: 'Flipkart',
-    audiobook: 'Buy',
-    ebook: 'Buy',
-    hardcopy: 'Buy',
-    links: {
-      audiobook: '#flipkart-audiobook',
-      ebook: '#flipkart-ebook',
-      hardcopy: 'https://tr.ee/1ZmQrRzCI-'
-    }
-  },
-  {
-    name: 'Meesho',
-    audiobook: 'Buy',
-    ebook: 'Buy',
-    hardcopy: 'Buy',
-    links: {
-      audiobook: '#meesho-audiobook',
-      ebook: '#meesho-ebook',
-      hardcopy: '#meesho-hardcopy'
-    }
-  },
-  {
-    name: 'Blue Cloud Store',
-    audiobook: 'Buy',
-    ebook: 'Buy',
-    hardcopy: 'Buy',
-    links: {
-      audiobook: '#bluecloud-audiobook',
-      ebook: '#bluecloud-ebook',
-      hardcopy: '#bluecloud-hardcopy'
-    }
-  },
-  {
-    name: 'Amazon Kindle',
-    audiobook: 'Buy',
-    ebook: 'Buy',
-    hardcopy: 'Buy',
-    links: {
-      audiobook: '#kindle-audiobook',
-      ebook: 'https://tr.ee/3cVyVZbnjB',
-      hardcopy: '#kindle-hardcopy'
-    }
-  },
-  {
-    name: 'Google Play Books',
-    audiobook: null,
-    ebook: 'Global E-Book Listing (150+ Countries)',
-    hardcopy: null,
-    links: {
-      ebook: '#google-play'
-    }
-  },
-  {
-    name: 'Blue Cloud Publishers E-Store',
-    audiobook: 'Buy',
-    ebook: 'Buy',
-    hardcopy: 'Buy',
-    links: {
-      audiobook: '#estore-audiobook',
-      ebook: '#estore-ebook',
-      hardcopy: '#estore-hardcopy'
-    }
-  },
-  {
-    name: 'Spotify',
-    audiobook: null,
-    ebook: 'Buy',
-    hardcopy: null,
-    links: {
-      ebook: '#spotify-ebook'
-    }
-  },
-  {
-    name: 'Amazon Music',
-    audiobook: null,
-    ebook: 'Buy',
-    hardcopy: null,
-    links: {
-      ebook: '#amazon-music-ebook'
-    }
-  },
-  {
-    name: 'Apple Music',
-    audiobook: null,
-    ebook: 'Buy',
-    hardcopy: null,
-    links: {
-      ebook: '#apple-music-ebook'
-    }
-  }
-];
+]
 
-const BuyPopup = ({ bookTitle = 'The Loop Trilogy', className = '', buttonText = 'Buy Now', showIcon = true }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openPopup = () => setIsOpen(true);
-  const closePopup = () => setIsOpen(false);
-
-  const handleBuyClick = (link) => {
-    if (link && link !== '#') {
-      window.open(link, '_blank');
-    }
-  };
-
-  const renderCell = (value, link) => {
-    if (!value) {
-      return <span className="buy-popup-dash">—</span>;
-    }
-
-    if (value === 'Buy') {
-      return (
-        <button
-          className="buy-popup-btn-small"
-          onClick={() => handleBuyClick(link)}
-        >
-          Buy
-        </button>
-      );
-    }
-
-    if (value === 'Add-On') {
-      return <span className="buy-popup-badge">Add-On</span>;
-    }
-
-    // For special cases like "Global E-Book Listing"
-    return (
-      <button
-        className="buy-popup-btn-small buy-popup-global"
-        onClick={() => handleBuyClick(link)}
-      >
-        {value}
-      </button>
-    );
-  };
+export default function BuyPopup({ bookTitle = 'The Loop', className = '', buttonText = 'Buy Now', showIcon = true }) {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
-      {/* Main Buy Button */}
+      {/* Trigger */}
       <button
         className={`buy-popup-trigger ${className}`}
-        onClick={openPopup}
+        onClick={() => setIsOpen(true)}
       >
-        {showIcon && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-        )}
+        {showIcon && <ShoppingCart size={16} />}
         {buttonText}
       </button>
 
-      {/* Popup Overlay */}
+      {/* Overlay */}
       {isOpen && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-container" onClick={(e) => e.stopPropagation()}>
-            {/* Mobile Handle */}
-            <div className="buy-popup-handle"></div>
+        <div
+          className="buy-overlay"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="buy-sheet"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Handle (mobile) */}
+            <div className="buy-handle" />
+
             {/* Header */}
-            <div className="popup-header">
-              <h2>Buy "{bookTitle}"</h2>
-              <button className="close-btn" onClick={closePopup}>
-                ×
+            <div className="buy-header">
+              <div className="buy-header-icon">
+                <ShoppingCart size={20} className="text-teal-600" />
+              </div>
+              <div>
+                <p className="buy-header-label">Get your copy</p>
+                <h2 className="buy-header-title">"{bookTitle}"</h2>
+              </div>
+              <button className="buy-close" onClick={() => setIsOpen(false)} aria-label="Close">
+                <X size={18} />
               </button>
             </div>
 
-            {/* Table */}
-            <div className="table-wrapper">
-              <table className="buy-table">
-                <thead>
-                  <tr>
-                    <th>Platform</th>
-                    <th>Audiobook</th>
-                    <th>E-Book</th>
-                    <th>Hardcopy / Paperback</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {platforms.map((platform, index) => (
-                    <tr key={index}>
-                      <td className="buy-popup-platform-name">{platform.name}</td>
-                      <td data-label="Audiobook">{renderCell(platform.audiobook, platform.links?.audiobook)}</td>
-                      <td data-label="E-Book">{renderCell(platform.ebook, platform.links?.ebook)}</td>
-                      <td data-label="Hardcopy">{renderCell(platform.hardcopy, platform.links?.hardcopy)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* Links */}
+            <div className="buy-body">
+              {buyData.map(({ category, links }) => (
+                <div key={category} className="buy-category">
+                  <p className="buy-category-label">{category}</p>
+                  <div className="buy-links">
+                    {links.map(({ name, url }) => (
+                      <a
+                        key={name}
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="buy-link-btn"
+                      >
+                        <span className="buy-link-name">{name}</span>
+                        <ExternalLink size={14} className="buy-link-icon" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-
           </div>
         </div>
       )}
     </>
-  );
-};
-
-export default BuyPopup;
+  )
+}

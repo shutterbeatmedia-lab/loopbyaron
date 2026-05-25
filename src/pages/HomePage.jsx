@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight, Clock, Infinity, ShoppingCart, MessageSquareQuote } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, ShoppingCart, Infinity, MessageSquareQuote } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
 import StarRating from '../components/StarRating'
 import ReviewForm from '../components/ReviewForm'
@@ -22,7 +22,7 @@ function HeroContent({ onNavigate }) {
         className="flex justify-center mb-8 md:mb-10"
       >
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 px-4 py-2 rounded-full text-sm font-medium">
-          <Clock size={14} className="text-teal-300" /> Coming Summer 2026
+          <ShoppingCart size={14} className="text-teal-300" /> On Sale Now
         </div>
       </motion.div>
 
@@ -167,6 +167,22 @@ function BookCard({ book, index, onNavigate }) {
           )}
         </div>
       </div>
+
+      {/* Illustration thumbnails — Part I only */}
+      {isPartOne && book.chapterImages?.length > 0 && (
+        <div className="bg-gray-50 border-b border-gray-100 px-2 py-2 overflow-x-auto">
+          <div className="flex gap-1.5 w-max">
+            {book.chapterImages.map((src, i) => (
+              <img
+                key={i} src={src} alt={`Illustration ${i + 1}`}
+                loading="lazy" decoding="async"
+                className="flex-shrink-0 rounded-md object-cover"
+                style={{ width: 48, height: 48 }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Body */}
       <div className="p-5 flex flex-col flex-1">

@@ -35,12 +35,7 @@ export const chapterIllustrations = [
 export const bookImages = {
   theLoop: {
     cover: theLoopCover,
-    carousel: [
-      theLoopCover,
-      'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
-      'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80',
-      'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
-    ],
+    carousel: [theLoopCover, ...chapterIllustrations],
   },
   withinTheLoop: {
     cover: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80',
