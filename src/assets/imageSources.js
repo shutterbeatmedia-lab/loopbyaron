@@ -1,3 +1,4 @@
+import theLoopCover from './images/Book cover.jpeg'
 import Ch1P1 from './images/The Loop/Ch1P1.png'
 import Ch1P2 from './images/The Loop/Ch1P2.png'
 import Ch1P3 from './images/The Loop/Ch1P3.png'
@@ -33,9 +34,9 @@ export const chapterIllustrations = [
 
 export const bookImages = {
   theLoop: {
-    cover: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=80',
+    cover: theLoopCover,
     carousel: [
-      'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=80',
+      theLoopCover,
       'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
       'https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80',
       'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
