@@ -46,8 +46,7 @@ export default function ImageCarousel({ images = [] }) {
 
       {/* Main image */}
       <div
-        className="relative overflow-hidden bg-gray-50 cursor-grab active:cursor-grabbing"
-        style={{ aspectRatio: '3/4' }}
+        className="relative overflow-hidden bg-gray-50 cursor-grab active:cursor-grabbing aspect-[3/2] md:aspect-[3/4]"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
       >
