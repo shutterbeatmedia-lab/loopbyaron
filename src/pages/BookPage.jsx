@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShoppingCart, ArrowRight, ChevronLeft, ChevronRight, PenTool, User } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, PenTool, User } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
 import StarRating from '../components/StarRating'
 import ImageCarousel from '../components/ImageCarousel'
@@ -9,86 +9,6 @@ import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 import BuyPopup from '../components/BuyPopup/BuyPopup'
 import { books, getBookBySlug } from '../data/content'
-
-// ─── CHAPTER GALLERY (Part I only) ───────────────────────────────────────────
-function ChapterGallery({ images }) {
-  const [selected, setSelected] = useState(null)
-
-  const prev = (e) => { e.stopPropagation(); setSelected((s) => (s - 1 + images.length) % images.length) }
-  const next = (e) => { e.stopPropagation(); setSelected((s) => (s + 1) % images.length) }
-
-  return (
-    <section className="section-space bg-[#faf8f5]">
-      <div className="section-shell-wide">
-        <FadeIn className="text-center mb-12">
-          <h2 className="section-title">A Glimpse Inside</h2>
-          <p className="section-sub">Chapter illustrations from The Loop — 5 seasons, 4 parts each</p>
-        </FadeIn>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {images.map((src, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-20px' }}
-              transition={{ duration: 0.4, delay: (i % 4) * 0.08 }}
-              className="relative overflow-hidden rounded-xl cursor-pointer group"
-              style={{ aspectRatio: '2/3' }}
-              onClick={() => setSelected(i)}
-            >
-              <img
-                src={src}
-                alt={`Chapter illustration ${i + 1}`}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Lightbox */}
-      {selected !== null && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelected(null)}
-        >
-          <button
-            aria-label="Close"
-            className="absolute top-4 right-4 text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 transition-colors"
-            onClick={() => setSelected(null)}
-          >×</button>
-          <button
-            aria-label="Previous"
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 transition-colors"
-            onClick={prev}
-          >‹</button>
-          <motion.img
-            key={selected}
-            src={images[selected]}
-            alt={`Chapter illustration ${selected + 1}`}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.25 }}
-            className="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            aria-label="Next"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/25 transition-colors"
-            onClick={next}
-          >›</button>
-          <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm">
-            {selected + 1} / {images.length}
-          </p>
-        </div>
-      )}
-    </section>
-  )
-}
 
 // ─── AUTHOR EXPERIENCE (Part I only) ─────────────────────────────────────────
 function AuthorExperience({ bookTitle, authorExperience }) {
@@ -368,11 +288,6 @@ export default function BookPage({ slug, onNavigate }) {
 
       {/* Sales performance intentionally hidden for now.
           Re-enable the SalesStats block here when needed. */}
-
-      {/* ── Chapter Illustrations — Part I only ──────────────────────── */}
-      {isPartOne && book.chapterImages?.length > 0 && (
-        <ChapterGallery images={book.chapterImages} />
-      )}
 
       {/* ── Author Experience — Part I only ──────────────────────────── */}
       {isPartOne && book.authorExperience && (
