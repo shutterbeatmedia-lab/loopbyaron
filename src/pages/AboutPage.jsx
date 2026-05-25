@@ -23,92 +23,103 @@ export default function AboutPage({ onNavigate }) {
   return (
     <>
       {/* ── Author Hero ──────────────────────────────────────────────────── */}
-      <section className="pt-24 pb-12 bg-white">
-        <div className="section-shell-wide">
-          <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-8 xl:gap-12 items-center">
+      <section className="relative pt-24 pb-0 overflow-hidden bg-[#0d1f2d]">
+        {/* Background texture */}
+        <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.8) 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0d1f2d] via-[#0f2744] to-[#0d3d38] opacity-90" />
+
+        <div className="relative section-shell-wide">
+          <div className="grid lg:grid-cols-[1fr_1.1fr] gap-0 lg:gap-12 xl:gap-16 items-end">
+
             {/* Photo */}
-            <FadeIn x={-30} y={0}>
-              <div className="rounded-[2rem] overflow-hidden shadow-[0_28px_70px_rgba(15,23,42,0.14)]">
-                <img
-                  src={aron}
-                  alt="aron"
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-[420px] lg:h-[460px] xl:h-[500px] object-contain bg-gray-100"
-                />
+            <FadeIn x={-24} y={0} className="flex justify-center lg:justify-start">
+              <div className="relative w-full max-w-sm lg:max-w-none">
+                {/* Glow behind image */}
+                <div className="absolute -inset-4 rounded-[2.5rem] bg-teal-500/10 blur-2xl" />
+                <div className="relative rounded-t-[2rem] lg:rounded-[2rem] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
+                  style={{ aspectRatio: '3/4' }}>
+                  <img
+                    src={aron}
+                    alt="Aron Goves"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1f2d]/60 via-transparent to-transparent" />
+                </div>
               </div>
             </FadeIn>
 
             {/* Bio */}
-            <FadeIn delay={0.15}>
-              <div className="rounded-[2rem] border border-gray-100 bg-white p-7 shadow-[0_20px_55px_rgba(15,23,42,0.06)] md:p-8 xl:p-9">
-                <span className="badge mb-4 inline-block">Author &amp; Philosopher</span>
-                <h1 className="text-4xl md:text-[3.15rem] xl:text-[3.6rem] font-bold text-gray-900 mb-4 tracking-tight leading-none">Aron Goves</h1>
-                <p className="text-gray-600 text-base xl:text-lg leading-7 mb-4">
-                  Aron Goves is a marketing specialist, writer, photographer, filmmaker, and VFX artist,
-                  as well as the CEO and Founder of ShutterBeat Media. With a career rooted in visual
-                  storytelling and human psychology, Aron brings a unique multidimensional perspective
-                  to his writing.
-                </p>
-                <p className="text-gray-600 text-sm md:text-base leading-7 mb-7">
-                  In The Loop Trilogy, he blends introspective narrative with thought-provoking themes
-                  designed to challenge readers to confront the patterns, distractions, and overlooked
-                  truths of everyday life. His work reflects a deep curiosity about human behaviour and
-                  perception, encouraging readers not just to observe the story but to question their own
-                  reality within it. Through this trilogy, Aron seeks to reach those willing to pause,
-                  reflect, and explore the unseen loops that shape their lives.
-                </p>
+            <FadeIn delay={0.15} className="py-10 lg:py-16">
+              <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-teal-500/15 border border-teal-400/25 text-teal-300 text-xs font-semibold uppercase tracking-widest mb-6">
+                Author &amp; Philosopher
+              </span>
+              <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold text-white mb-5 tracking-tight leading-[1.05]">
+                Aron Goves
+              </h1>
+              <p className="text-gray-300 text-base xl:text-lg leading-7 mb-4">
+                Aron Goves is a marketing specialist, writer, photographer, filmmaker, and VFX artist,
+                as well as the CEO and Founder of ShutterBeat Media. With a career rooted in visual
+                storytelling and human psychology, Aron brings a unique multidimensional perspective
+                to his writing.
+              </p>
+              <p className="text-gray-400 text-sm md:text-base leading-7 mb-8">
+                In The Loop Trilogy, he blends introspective narrative with thought-provoking themes
+                designed to challenge readers to confront the patterns, distractions, and overlooked
+                truths of everyday life. His work reflects a deep curiosity about human behaviour and
+                perception, encouraging readers not just to observe the story but to question their own
+                reality within it.
+              </p>
 
-                {/* Credential badges */}
+              {/* Credentials */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {credentials.map((c, i) => (
+                  <motion.span
+                    key={c}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.07 }}
+                    className="inline-flex items-center px-3 py-1.5 rounded-lg border border-white/10 text-gray-300 text-xs font-medium bg-white/5 hover:bg-white/10 transition-colors cursor-default"
+                  >
+                    {c}
+                  </motion.span>
+                ))}
+              </div>
+
+              {/* Social links */}
+              <div className="pt-6 border-t border-white/10">
+                <p className="text-xs font-semibold uppercase tracking-widest text-teal-400 mb-3">Connect</p>
                 <div className="flex flex-wrap gap-2.5">
-                  {credentials.map((c, i) => (
-                    <motion.span
-                      key={c}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.08 }}
-                      className="inline-flex items-center px-3.5 py-2 rounded-xl border border-teal-200 text-teal-700 text-xs md:text-sm font-medium bg-teal-50 hover:bg-teal-100 transition-colors cursor-default"
-                    >
-                      {c}
-                    </motion.span>
-                  ))}
-                </div>
-
-                <div className="mt-7 pt-6 border-t border-gray-100">
-                  <h3 className="text-lg font-bold text-teal-600 mb-3">Connect</h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    {socialLinks.map(({ Icon, label, href }, i) => {
-                      const sharedProps = {
-                        key: label,
-                        initial: { opacity: 0, y: 10 },
-                        whileInView: { opacity: 1, y: 0 },
-                        viewport: { once: true },
-                        transition: { delay: i * 0.08 },
-                        className: 'inline-flex items-center gap-2.5 rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-teal-300 hover:text-teal-700 hover:shadow-md',
-                      }
-
-                      if (href) {
-                        return (
-                          <motion.a {...sharedProps} href={href} target="_blank" rel="noreferrer">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-                              <Icon size={16} />
-                            </span>
-                            {label}
-                          </motion.a>
-                        )
-                      }
-
+                  {socialLinks.map(({ Icon, label, href }, i) => {
+                    const sharedProps = {
+                      key: label,
+                      initial: { opacity: 0, y: 10 },
+                      whileInView: { opacity: 1, y: 0 },
+                      viewport: { once: true },
+                      transition: { delay: i * 0.08 },
+                      className: 'inline-flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm font-medium text-gray-300 transition-all duration-200 hover:-translate-y-0.5 hover:border-teal-400/40 hover:text-white hover:bg-white/10',
+                    }
+                    if (href) {
                       return (
-                        <motion.button {...sharedProps} type="button">
-                          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-                            <Icon size={16} />
+                        <motion.a {...sharedProps} href={href} target="_blank" rel="noreferrer">
+                          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500/15 text-teal-400">
+                            <Icon size={15} />
                           </span>
                           {label}
-                        </motion.button>
+                        </motion.a>
                       )
-                    })}
-                  </div>
+                    }
+                    return (
+                      <motion.button {...sharedProps} type="button">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500/15 text-teal-400">
+                          <Icon size={15} />
+                        </span>
+                        {label}
+                      </motion.button>
+                    )
+                  })}
                 </div>
               </div>
             </FadeIn>

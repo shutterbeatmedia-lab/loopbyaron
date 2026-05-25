@@ -1,4 +1,4 @@
-import { bookImages } from '../assets/imageSources'
+import { bookImages, chapterIllustrations } from '../assets/imageSources'
 
 export const books = [
   {
@@ -28,6 +28,7 @@ export const books = [
         text: `As a visual storyteller and VFX artist, I approached the visual direction of The Loop with the same care that shaped its writing. The goal was to create imagery that feels immersive, atmospheric, and emotionally aligned with the world of the trilogy.\n\nEvery visual choice is intended to support the tone of the story and deepen the reader's connection to its mystery, tension, and underlying themes. The illustrations are designed not just to accompany the narrative, but to expand the feeling of stepping into its world.`,
       },
     ],
+    chapterImages: chapterIllustrations,
     otherParts: ['part-two', 'part-three'],
   },
   {

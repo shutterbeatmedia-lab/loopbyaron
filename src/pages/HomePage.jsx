@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, ChevronLeft, ChevronRight, Clock, Infinity, ShoppingCart, MessageSquareQuote } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, ShoppingCart, Infinity, MessageSquareQuote } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
 import StarRating from '../components/StarRating'
 import ReviewForm from '../components/ReviewForm'
@@ -22,7 +22,7 @@ function HeroContent({ onNavigate }) {
         className="flex justify-center mb-8 md:mb-10"
       >
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 px-4 py-2 rounded-full text-sm font-medium">
-          <Clock size={14} className="text-teal-300" /> Coming Summer 2026
+          <ShoppingCart size={14} className="text-teal-300" /> On Sale Now
         </div>
       </motion.div>
 
@@ -89,7 +89,7 @@ function Hero({ onNavigate }) {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg,rgba(10,40,70,0.80) 0%,rgba(13,100,90,0.75) 100%)' }}
+          style={{ background: 'rgba(0,0,0,0.50)' }}
         />
         <HeroContent onNavigate={onNavigate} />
       </section>
@@ -103,7 +103,7 @@ function Hero({ onNavigate }) {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg,rgba(10,40,70,0.80) 0%,rgba(13,100,90,0.75) 100%)' }}
+          style={{ background: 'rgba(0,0,0,0.50)' }}
         />
         <HeroContent onNavigate={onNavigate} />
       </section>
@@ -162,11 +162,27 @@ function BookCard({ book, index, onNavigate }) {
           <h3 className="text-white font-bold text-xl drop-shadow-lg">{book.title}</h3>
           {isComingSoonPart && (
             <p className="mt-1 text-white font-semibold text-sm uppercase tracking-[0.18em] drop-shadow-lg">
-              Coming Soon
+              On Sale Now
             </p>
           )}
         </div>
       </div>
+
+      {/* Illustration thumbnails — Part I only */}
+      {isPartOne && book.chapterImages?.length > 0 && (
+        <div className="bg-gray-50 border-b border-gray-100 px-2 py-2 overflow-x-auto">
+          <div className="flex gap-1.5 w-max">
+            {book.chapterImages.map((src, i) => (
+              <img
+                key={i} src={src} alt={`Illustration ${i + 1}`}
+                loading="lazy" decoding="async"
+                className="flex-shrink-0 rounded-md object-cover"
+                style={{ width: 48, height: 48 }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Body */}
       <div className="p-5 flex flex-col flex-1">

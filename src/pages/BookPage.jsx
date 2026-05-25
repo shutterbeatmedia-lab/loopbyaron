@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShoppingCart, ArrowRight, ChevronLeft, ChevronRight, PenTool, User } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, PenTool, User } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
 import StarRating from '../components/StarRating'
 import ImageCarousel from '../components/ImageCarousel'
@@ -178,6 +178,22 @@ function ExploreOtherParts({ currentBook, onNavigate }) {
                   </div>
                 </div>
 
+                {/* Illustration thumbnails — Part I only */}
+                {isPartOne && book.chapterImages?.length > 0 && (
+                  <div className="bg-gray-50 border-b border-gray-100 px-2 py-2 overflow-x-auto">
+                    <div className="flex gap-1.5 w-max">
+                      {book.chapterImages.map((src, i) => (
+                        <img
+                          key={i} src={src} alt={`Illustration ${i + 1}`}
+                          loading="lazy" decoding="async"
+                          className="flex-shrink-0 rounded-md object-cover"
+                          style={{ width: 48, height: 48 }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Buttons */}
                 <div className="p-4 flex gap-3">
                   {isPartOne ? (
@@ -220,7 +236,7 @@ export default function BookPage({ slug, onNavigate }) {
       {/* ── Book Hero ────────────────────────────────────────────────────── */}
       <section className="pt-28 pb-16 md:pb-20 bg-white">
         <div className="section-shell-wide">
-          <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 xl:gap-14 items-start">
+          <div className="grid lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr] gap-8 xl:gap-12 items-start">
             {/* Carousel */}
             <FadeIn x={-30} y={0}>
               <ImageCarousel images={book.carouselImages} />
