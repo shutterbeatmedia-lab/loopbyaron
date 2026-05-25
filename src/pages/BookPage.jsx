@@ -316,7 +316,7 @@ export default function BookPage({ slug, onNavigate }) {
       {/* ── Book Hero ────────────────────────────────────────────────────── */}
       <section className="pt-28 pb-16 md:pb-20 bg-white">
         <div className="section-shell-wide">
-          <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 xl:gap-14 items-start">
+          <div className="grid lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr] gap-8 xl:gap-12 items-start">
             {/* Carousel */}
             <FadeIn x={-30} y={0}>
               <ImageCarousel images={book.carouselImages} />
