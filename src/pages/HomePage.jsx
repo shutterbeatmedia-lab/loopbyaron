@@ -99,7 +99,7 @@ function Hero({ onNavigate }) {
         <img
           src={homeBanner}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-top"
         />
         <div
           className="absolute inset-0"
