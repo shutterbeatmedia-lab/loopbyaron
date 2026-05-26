@@ -1,4 +1,4 @@
-import theLoopCover from './images/Book cover.jpeg'
+import theLoopCover from './images/LoopCover.png'
 import Ch1P1 from './images/The Loop/Ch1P1.png'
 import Ch1P2 from './images/The Loop/Ch1P2.png'
 import Ch1P3 from './images/The Loop/Ch1P3.png'

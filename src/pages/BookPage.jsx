@@ -234,42 +234,54 @@ export default function BookPage({ slug, onNavigate }) {
   return (
     <>
       {/* ── Book Hero ────────────────────────────────────────────────────── */}
-      <section className="pt-28 pb-16 md:pb-20 bg-white">
+      <section className="pt-20 sm:pt-28 pb-10 md:pb-20 bg-white">
         <div className="section-shell-wide">
-          <div className="grid lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr] gap-8 xl:gap-12 items-start">
+          <div className="grid lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr] gap-0 md:gap-8 xl:gap-12 items-start overflow-hidden">
+
             {/* Carousel */}
-            <FadeIn x={-30} y={0}>
+            <FadeIn y={20} x={0} className="min-w-0 w-full">
               <ImageCarousel images={book.carouselImages} />
             </FadeIn>
 
-            {/* Info */}
-            <FadeIn delay={0.15}>
-              <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)] md:p-10">
-                <span className="badge mb-4 inline-block">{book.badge}</span>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">{book.title}</h1>
+            {/* Info — seamless on mobile, card on desktop */}
+            <FadeIn delay={0.15} className="min-w-0 w-full">
+              <div className="
+                w-full px-4 py-6
+                sm:px-6 sm:py-8
+                md:rounded-[2rem] md:border md:border-gray-100 md:bg-white md:p-10
+                md:shadow-[0_20px_55px_rgba(15,23,42,0.06)]
+              ">
+                <span className="badge mb-3 inline-block">{book.badge}</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 leading-tight">
+                  {book.title}
+                </h1>
                 {book.tagline && (
-                  <p className="text-teal-600 text-lg font-medium mb-6">{book.tagline}</p>
+                  <p className="text-teal-600 text-base sm:text-lg font-medium mb-4">{book.tagline}</p>
                 )}
 
-                {/* Part I: show synopsis + Buy Now */}
+                {/* Part I: synopsis + Buy Now */}
                 {isPartOne && (
                   <>
-                    <h2 className="text-lg font-bold text-gray-900 mb-3">Synopsis</h2>
-                    <div className="space-y-3 text-gray-600 leading-relaxed text-base mb-8">
+                    <div className="flex items-center gap-2 mb-3 mt-4">
+                      <span className="text-sm font-bold uppercase tracking-widest text-gray-400">Synopsis</span>
+                      <div className="flex-1 h-px bg-gray-100" />
+                    </div>
+                    <div className="space-y-3 text-gray-600 leading-relaxed text-sm sm:text-base mb-6">
                       {book.synopsis.split('\n\n').map((para, i) => (
                         <p key={i}>{para}</p>
                       ))}
                     </div>
-                    <div className="w-full">
-                      <BuyPopup bookTitle={book.title} className="w-full btn-primary py-4 text-base rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all" />
-                    </div>
+                    <BuyPopup
+                      bookTitle={book.title}
+                      className="w-full btn-primary py-4 text-base rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all"
+                    />
                   </>
                 )}
 
-                {/* Parts II & III: no synopsis, Get Updates only */}
+                {/* Parts II & III */}
                 {!isPartOne && (
-                  <div className="mt-2">
-                    <p className="text-gray-500 text-lg mb-8 leading-relaxed">
+                  <div className="mt-3">
+                    <p className="text-gray-500 text-base sm:text-lg mb-6 leading-relaxed">
                       This book is coming soon. Stay tuned for updates on the next instalment of The Loop Trilogy.
                     </p>
                     <button
@@ -282,6 +294,7 @@ export default function BookPage({ slug, onNavigate }) {
                 )}
               </div>
             </FadeIn>
+
           </div>
         </div>
       </section>

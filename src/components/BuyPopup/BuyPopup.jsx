@@ -6,21 +6,21 @@ const buyData = [
   {
     category: 'Hardcover / Hardback',
     links: [
-      { name: 'Amazon.in',  url: 'https://tr.ee/OSIjSw_AS2' },
-      { name: 'Flipkart',   url: 'https://dl.flipkart.com/s/3MDw4zNNNN' },
+      { name: 'Amazon.in', url: 'https://www.amazon.in/dp/B0GZQV6D6W' },
+      { name: 'Flipkart',  url: 'https://dl.flipkart.com/s/3MDw4zNNNN' },
     ],
   },
   {
     category: 'Paperback',
     links: [
-      { name: 'Amazon.in',    url: 'https://tr.ee/EGGFgrrDNB' },
-      { name: 'Flipkart.com', url: 'https://tr.ee/1ZmQrRzCI-' },
+      { name: 'Amazon.in',    url: 'https://www.amazon.in/dp/B0GYVDVV7T' },
+      { name: 'Flipkart.com', url: 'https://www.flipkart.com/loop-trilogy-part-1/p/itmbb5cd79cb5b24?pid=9788169286725' },
     ],
   },
   {
     category: 'Ebook',
     links: [
-      { name: 'Amazon Kindle', url: 'https://tr.ee/3cVyVZbnjB' },
+      { name: 'Amazon Kindle', url: 'https://www.amazon.in/dp/B0GZQN25K9' },
     ],
   },
 ]
