@@ -38,7 +38,7 @@ export default function ImageCarousel({ images = [] }) {
     <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100 select-none bg-stone-900">
 
       {/* ── Main image track ─────────────────────────────────────────────── */}
-      <div className="relative aspect-[3/2] md:aspect-[3/4] overflow-hidden">
+      <div className="relative aspect-[3/2] lg:aspect-[3/4] overflow-hidden">
         <div ref={emblaRef} className="h-full overflow-hidden">
           <div className="flex h-full touch-pan-y">
             {images.map((src, i) => (

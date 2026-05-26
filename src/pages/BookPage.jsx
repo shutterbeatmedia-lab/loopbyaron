@@ -236,17 +236,17 @@ export default function BookPage({ slug, onNavigate }) {
       {/* ── Book Hero ────────────────────────────────────────────────────── */}
       <section className="pt-20 sm:pt-28 pb-10 md:pb-20 bg-white">
         <div className="section-shell-wide">
-          <div className="grid lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr] gap-0 md:gap-8 xl:gap-12 items-start">
+          <div className="grid lg:grid-cols-[360px_1fr] xl:grid-cols-[400px_1fr] gap-0 md:gap-8 xl:gap-12 items-start overflow-hidden">
 
             {/* Carousel */}
-            <FadeIn y={20} x={0}>
+            <FadeIn y={20} x={0} className="min-w-0 w-full">
               <ImageCarousel images={book.carouselImages} />
             </FadeIn>
 
             {/* Info — seamless on mobile, card on desktop */}
-            <FadeIn delay={0.15}>
+            <FadeIn delay={0.15} className="min-w-0 w-full">
               <div className="
-                px-4 py-6
+                w-full px-4 py-6
                 sm:px-6 sm:py-8
                 md:rounded-[2rem] md:border md:border-gray-100 md:bg-white md:p-10
                 md:shadow-[0_20px_55px_rgba(15,23,42,0.06)]
